@@ -1,0 +1,38 @@
+services:
+  repo_ips_hl7:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: IPS-HL7Chile
+    restart: on-failure
+    environment:
+      TZ: "America/Santiago"
+    ports:
+      - "8280:8280"
+    configs:
+      - source: hapi
+        target: /app/config/application.yaml
+    depends_on:
+      - postgres-ips-hl7
+
+  postgres-ips-hl7:
+    image: postgres:14-alpine
+    container_name: IPS-HL7Chile-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: "hapi"
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "admin"
+      PGTZ: "America/Santiago"
+      TZ: "America/Santiago"
+    volumes:
+      - hapi-fhir-postgres:/var/lib/postgresql/data
+  
+
+volumes:
+  hapi-fhir-postgres:
+
+configs:
+  hapi:
+     file: ./hapi.application.yaml
+
