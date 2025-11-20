@@ -37,8 +37,8 @@ RUN rm -rf /opt/bitnami/tomcat/webapps/ROOT && \
 RUN mkdir -p /target && chown -R 1001:1001 target
 USER 1001
 
-COPY --chown=1001:1001 catalina.properties /opt/bitnami/tomcat/conf/catalina.properties
-COPY --chown=1001:1001 server.xml /opt/bitnami/tomcat/conf/server.xml
+COPY --chown=1001:1001 hapi-fhir-jpaserver-starter/catalina.properties /opt/bitnami/tomcat/conf/catalina.properties
+COPY --chown=1001:1001 hapi-fhir-jpaserver-starter/server.xml /opt/bitnami/tomcat/conf/server.xml
 COPY --from=build-hapi --chown=1001:1001 /tmp/hapi-fhir-jpaserver-starter/target/ROOT.war /opt/bitnami/tomcat/webapps/ROOT.war
 COPY --from=build-hapi --chown=1001:1001 /tmp/hapi-fhir-jpaserver-starter/opentelemetry-javaagent.jar /app
 
