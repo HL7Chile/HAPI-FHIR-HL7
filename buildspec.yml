@@ -188,7 +188,7 @@ phases:
             bulk_import_enabled: true
             narrative_enabled: true
             mdm_enabled: false
-            mdm_rules_json_location: "mdm-rules.json"
+            # mdm_rules_json_location: "mdm-rules.json"
             cors:
               allow_Credentials: true
               allowed_origin:
