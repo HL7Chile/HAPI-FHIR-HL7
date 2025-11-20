@@ -28,16 +28,17 @@ RUN mkdir /app && cp /tmp/hapi-fhir-jpaserver-starter/target/ROOT.war /app/main.
 ########### it can be built using eg. `docker build --target tomcat .`
 FROM docker.io/bitnamilegacy/tomcat:10.1.43-debian-12-r0 AS tomcat
 
+USER root
 RUN rm -rf /opt/bitnami/tomcat/webapps/ROOT && \
     mkdir -p /opt/bitnami/hapi/data/hapi/lucenefiles && \
+    chown -R 1001:1001 /opt/bitnami/hapi/data/hapi/lucenefiles && \
     chmod 775 /opt/bitnami/hapi/data/hapi/lucenefiles
 
-USER root
 RUN mkdir -p /target && chown -R 1001:1001 target
 USER 1001
 
-COPY --chown=1001:1001 hapi-fhir-jpaserver-starter/catalina.properties /opt/bitnami/tomcat/conf/catalina.properties
-COPY --chown=1001:1001 hapi-fhir-jpaserver-starter/server.xml /opt/bitnami/tomcat/conf/server.xml
+COPY --chown=1001:1001 catalina.properties /opt/bitnami/tomcat/conf/catalina.properties
+COPY --chown=1001:1001 server.xml /opt/bitnami/tomcat/conf/server.xml
 COPY --from=build-hapi --chown=1001:1001 /tmp/hapi-fhir-jpaserver-starter/target/ROOT.war /opt/bitnami/tomcat/webapps/ROOT.war
 COPY --from=build-hapi --chown=1001:1001 /tmp/hapi-fhir-jpaserver-starter/opentelemetry-javaagent.jar /app
 
