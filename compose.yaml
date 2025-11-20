@@ -8,7 +8,7 @@ services:
     environment:
       TZ: "America/Santiago"
     ports:
-      - "8280:8280"
+      - "8080:8080"
     configs:
       - source: hapi
         target: /app/config/application.yaml

@@ -21,6 +21,7 @@ package ca.uhn.fhir.jpa.ips.jpa.section;
 
 import ca.uhn.fhir.jpa.ips.api.IpsSectionContext;
 import ca.uhn.fhir.jpa.ips.jpa.JpaSectionSearchStrategy;
+import ca.uhn.fhir.jpa.searchparam.SearchParameterMap;
 import jakarta.annotation.Nonnull;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 
