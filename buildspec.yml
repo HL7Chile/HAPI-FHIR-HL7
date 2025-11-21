@@ -170,11 +170,11 @@ phases:
             custom-interceptor-classes: server.HL7Chile.CustomCapabilityStatementInterceptor
           
             tester:
-            home:
-              name: IPS-Server-HL7
-              server_address: 'http://localhost:$SERVER_PORT/fhir'
-              refuse_to_fetch_third_party_urls: false
-              fhir_version: R4
+              home:
+                name: IPS-Server-HL7
+                server_address: 'http://localhost:$SERVER_PORT/fhir'
+                refuse_to_fetch_third_party_urls: false
+                fhir_version: R4
 
         EOM
       - cat "hapi-fhir-jpaserver-starter/src/main/resources/application.yaml"
