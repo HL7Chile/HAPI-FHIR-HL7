@@ -3,7 +3,7 @@
 server:
   #  servlet:
   #    context-path: /example/path
-  port: 8280
+  port: 8080
 
 management:
   #The following configuration will enable the actuator endpoints at /actuator/health, /actuator/info, /actuator/prometheus, /actuator/metrics. For security purposes, only /actuator/health is enabled by default.
