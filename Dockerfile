@@ -13,11 +13,15 @@ COPY hapi-fhir-jpaserver-starter/src/ /tmp/hapi-fhir-jpaserver-starter/src/
 ### Cargar Interceptor
 COPY server/HL7Chile/ /tmp/hapi-fhir-jpaserver-starter/src/main/java/server/HL7Chile/
 
+### Carger Configuraciones Custom
+COPY custom/favicon.ico /tmp/hapi-fhir-jpaserver-starter/src/main/webapp/img/favicon.ico
+COPY custom/sample-logo.jpg /tmp/hapi-fhir-jpaserver-starter/src/main/webapp/img/sample-logo.jpg
+
 ### Cargar IPS Custom
 COPY hapi-fhir-jpaserver-ips/src/ /tmp/hapi-fhir-jpaserver-starter/src
 RUN mvn clean install -DskipTests -Djdk.lang.Process.launchMechanism=vfork
 
-COPY hapi.application.yaml /tmp/hapi-fhir-jpaserver-starter/src/main/resources/application.yaml
+# COPY hapi.application.yaml /tmp/hapi-fhir-jpaserver-starter/src/main/resources/application.yaml
 
 FROM build-hapi AS build-distroless
 RUN mvn package -DskipTests spring-boot:repackage -Pboot
