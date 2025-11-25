@@ -172,7 +172,7 @@ phases:
             tester:
               home:
                 name: IPS-Server-HL7
-                server_address: 'http://localhost:$SERVER_PORT/fhir'
+                server_address: 'https://fhirserver.hl7chile.cl/fhir'
                 refuse_to_fetch_third_party_urls: false
                 fhir_version: R4
 
