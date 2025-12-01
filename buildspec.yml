@@ -100,11 +100,11 @@ phases:
                 installMode: STORE_AND_INSTALL
                 reloadExisting: false
               
-              InternationalPatientSummaryChile:
-                name: hl7.fhir.cl.clips
-                version: 0.4.0
-                reloadExisting: false
-                installMode: STORE_AND_INSTALL
+              # InternationalPatientSummaryChile:
+              #   name: hl7.fhir.cl.clips
+              #   version: 0.4.0
+              #   reloadExisting: false
+              #   installMode: STORE_AND_INSTALL
               
               InternationalPatientSummaryIG:
                 name: hl7.fhir.uv.ips
