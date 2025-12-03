@@ -168,6 +168,17 @@ phases:
 
             custom-bean-packages: server.HL7Chile
             custom-interceptor-classes: server.HL7Chile.CustomCapabilityStatementInterceptor
+
+            remote_terminology_service:
+              all:
+                system: "*"
+                url: "https://tx.hl7chile.cl/r4/"
+              snomed:
+                system: "http://snomed.info/sct"
+                url: "https://tx.hl7chile.cl/r4/"
+              loinc:
+                system: "http://loinc.org"
+                url: "https://tx.hl7chile.cl/r4/"
           
             tester:
               home:
