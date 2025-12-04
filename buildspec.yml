@@ -111,6 +111,12 @@ phases:
                 version: 2.0.0
                 reloadExisting: false
                 installMode: STORE_AND_INSTALL
+              
+              MinimalCommonOncologyDataElements:
+                name: hl7.fhir.us.mcode
+                version: 4.0.0
+                reloadExisting: false
+                installMode: STORE_AND_INSTALL
 
             cr:
               enabled: false                           
@@ -170,12 +176,12 @@ phases:
             custom-interceptor-classes: server.HL7Chile.CustomCapabilityStatementInterceptor
 
             remote_terminology_service:
-              # all:
-              #   system: "*"
-              #   url: "https://tx.hl7chile.cl/r4/"
+              all:
+                system: "*"
+                url: "https://tx.hl7chile.cl/r4/"
               snomed:
                 system: "http://snomed.info/sct"
-                url: "https://snowstorm.ihtsdotools.org/fhir/"
+                url: "https://tx.hl7chile.cl/r4/"
               loinc:
                 system: "http://loinc.org"
                 url: "https://tx.hl7chile.cl/r4/"
