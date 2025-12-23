@@ -100,11 +100,17 @@ phases:
                 installMode: STORE_AND_INSTALL
                 reloadExisting: false
               
-              # InternationalPatientSummaryChile:
-              #   name: hl7.fhir.cl.clips
-              #   version: 0.4.0
-              #   reloadExisting: false
-              #   installMode: STORE_AND_INSTALL
+              MinsalNucleoInteroperabilidadDatos:
+                name: hl7.fhir.cl.minsal.nid
+                version: 0.4.9
+                reloadExisting: false
+                installMode: STORE_AND_INSTALL
+              
+              ResumenClinicoPacienteChile:
+                name: hl7.fhir.cl.clips
+                version: 0.5.0-ballot
+                reloadExisting: false
+                installMode: STORE_AND_INSTALL
               
               InternationalPatientSummaryIG:
                 name: hl7.fhir.uv.ips
@@ -176,15 +182,15 @@ phases:
             custom-interceptor-classes: server.HL7Chile.CustomCapabilityStatementInterceptor
 
             remote_terminology_service:
-              all:
-                system: "*"
-                url: "https://tx.hl7chile.cl/r4/"
+              # all:
+              #  system: "*"
+              #  url: "https://tx.hl7chile.cl/r4/"
               snomed:
                 system: "http://snomed.info/sct"
                 url: "https://snowstorm.hl7chile.cl/fhir/"
               loinc:
                 system: "http://loinc.org"
-                url: "https://tx.hl7chile.cl/r4/"
+                url: "https://snowstorm.hl7chile.cl/fhir/"
           
             tester:
               home:

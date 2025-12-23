@@ -164,25 +164,30 @@ hapi:
     ig_runtime_upload_enabled: true
     # validate_resource_status_for_package_upload: false   # default true
     implementationguides:
-    ###    example from registry (packages.fhir.org)
       clcore:
         name: hl7.fhir.cl.clcore
         version: 1.9.4
         installMode: STORE_AND_INSTALL
         reloadExisting: false
       
-      # InternationalPatientSummaryChile:
+      MinsalNucleoInteroperabilidadDatos:
+        name: hl7.fhir.cl.minsal.nid
+        version: 0.4.9
+        reloadExisting: false
+        installMode: STORE_AND_INSTALL
+      
+      # ResumenClinicoPacienteChile:
       #   name: hl7.fhir.cl.clips
-      #   version: 0.4.0
+      #   version: 0.5.0-ballot
       #   reloadExisting: false
       #   installMode: STORE_AND_INSTALL
       
-      InternationalPatientSummaryIG:
-        name: hl7.fhir.uv.ips
-        version: 2.0.0
-        reloadExisting: false
-        installMode: STORE_AND_INSTALL
-  
+      # InternationalPatientSummaryIG:
+      #   name: hl7.fhir.uv.ips
+      #   version: 2.0.0
+      #   reloadExisting: false
+      #   installMode: STORE_AND_INSTALL
+      
       MinimalCommonOncologyDataElements:
         name: hl7.fhir.us.mcode
         version: 4.0.0
@@ -407,15 +412,15 @@ hapi:
     # P. Remote Terminology Service (disabled by default)
     # -------------------------------------------------------------------------------
     remote_terminology_service:
-      all:
-        system: "*"
-        url: "https://tx.hl7chile.cl/r4/"
+      # all:
+      #  system: "*"
+      #  url: "https://tx.hl7chile.cl/r4/"
       snomed:
         system: "http://snomed.info/sct"
-        url: "https://tx.hl7chile.cl/r4/"
+        url: "https://snowstorm.hl7chile.cl/fhir/"
       loinc:
         system: "http://loinc.org"
-        url: "https://tx.hl7chile.cl/r4/"
+        url: "https://snowstorm.hl7chile.cl/fhir/"
     # -------------------------------------------------------------------------------
     # Q. Subscriptions (disabled by default)
     # -------------------------------------------------------------------------------
