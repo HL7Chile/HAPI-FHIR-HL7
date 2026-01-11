@@ -188,9 +188,6 @@ phases:
               snomed:
                 system: "http://snomed.info/sct"
                 url: "https://snowstorm.hl7chile.cl/fhir/"
-              icd-10:
-                system: "http://hl7.org/fhir/sid/icd-10"
-                url: "https://tx.hl7chile.cl/r4/"
               icd-o:
                 system: "http://terminology.hl7.org/CodeSystem/icd-o-3"
                 url: "https://snowstorm.hl7chile.cl/fhir/"
