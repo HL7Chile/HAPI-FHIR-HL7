@@ -162,6 +162,8 @@ phases:
 
             search_index_full_text_enabled: false
 
+            allow_external_references: true
+
             bulk_export_enabled: false
             bulk_import_enabled: false
 
