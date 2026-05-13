@@ -183,19 +183,19 @@ phases:
             custom-bean-packages: server.HL7Chile
             custom-interceptor-classes: server.HL7Chile.CustomCapabilityStatementInterceptor
 
-            remote_terminology_service:
-              all:
-                system: "*"
-                url: "https://tx.hl7chile.cl/r4/"
-              snomed:
-                system: "http://snomed.info/sct"
-                url: "https://snowstorm.hl7chile.cl/fhir/"
-              icd-o:
-                system: "http://terminology.hl7.org/CodeSystem/icd-o-3"
-                url: "https://snowstorm.hl7chile.cl/fhir/"
-              loinc:
-                system: "http://loinc.org"
-                url: "https://snowstorm.hl7chile.cl/fhir/"
+            # remote_terminology_service:
+            #   all:
+            #     system: "*"
+            #     url: "https://tx.hl7chile.cl/r4/"
+            #   snomed:
+            #     system: "http://snomed.info/sct"
+            #     url: "https://snowstorm.hl7chile.cl/fhir/"
+            #   icd-o:
+            #     system: "http://terminology.hl7.org/CodeSystem/icd-o-3"
+            #     url: "https://snowstorm.hl7chile.cl/fhir/"
+            #   loinc:
+            #     system: "http://loinc.org"
+            #     url: "https://snowstorm.hl7chile.cl/fhir/"
           
             tester:
               home:
