@@ -40,94 +40,94 @@ public class CustomCapabilityStatementInterceptor extends InterceptorAdapter {
         );
 
         // Lista de recursos a conservar
-        List<ResourceType> resourcesToKeep = Arrays.asList(
-                ResourceType.AuditEvent,
-                ResourceType.AllergyIntolerance,
-                ResourceType.Bundle,
-                ResourceType.Patient,
-                ResourceType.Encounter,
-                ResourceType.CarePlan,
-                ResourceType.CareTeam,
-                ResourceType.Condition,
-                ResourceType.Composition,
-                ResourceType.Immunization,
-                ResourceType.ImplementationGuide,
-                ResourceType.HealthcareService,
-                ResourceType.StructureDefinition,
-                ResourceType.Practitioner,
-                ResourceType.Organization,
-                ResourceType.PractitionerRole,
-                ResourceType.CodeSystem,
-                ResourceType.ValueSet,
-                ResourceType.Observation,
-                ResourceType.Provenance,
-                ResourceType.Medication,
-                ResourceType.Location,
-                ResourceType.DiagnosticReport,
-                ResourceType.ImagingStudy,
-                ResourceType.MedicationRequest,
-                ResourceType.MedicationStatement,
-                ResourceType.MedicationDispense,
-                ResourceType.Procedure,
-                ResourceType.DeviceUseStatement,
-                ResourceType.Parameters
-        );
+        // List<ResourceType> resourcesToKeep = Arrays.asList(
+        //         ResourceType.AuditEvent,
+        //         ResourceType.AllergyIntolerance,
+        //         ResourceType.Bundle,
+        //         ResourceType.Patient,
+        //         ResourceType.Encounter,
+        //         ResourceType.CarePlan,
+        //         ResourceType.CareTeam,
+        //         ResourceType.Condition,
+        //         ResourceType.Composition,
+        //         ResourceType.Immunization,
+        //         ResourceType.ImplementationGuide,
+        //         ResourceType.HealthcareService,
+        //         ResourceType.StructureDefinition,
+        //         ResourceType.Practitioner,
+        //         ResourceType.Organization,
+        //         ResourceType.PractitionerRole,
+        //         ResourceType.CodeSystem,
+        //         ResourceType.ValueSet,
+        //         ResourceType.Observation,
+        //         ResourceType.Provenance,
+        //         ResourceType.Medication,
+        //         ResourceType.Location,
+        //         ResourceType.DiagnosticReport,
+        //         ResourceType.ImagingStudy,
+        //         ResourceType.MedicationRequest,
+        //         ResourceType.MedicationStatement,
+        //         ResourceType.MedicationDispense,
+        //         ResourceType.Procedure,
+        //         ResourceType.DeviceUseStatement,
+        //         ResourceType.Parameters
+        // );
 
-        List<Enumeration<CapabilityStatement.ReferenceHandlingPolicy>> referenceHandlingPolicy = Arrays.asList(
-            new Enumeration<>(new CapabilityStatement.ReferenceHandlingPolicyEnumFactory(), CapabilityStatement.ReferenceHandlingPolicy.LITERAL),
-            new Enumeration<>(new CapabilityStatement.ReferenceHandlingPolicyEnumFactory(), CapabilityStatement.ReferenceHandlingPolicy.LOGICAL)
-        );
+        // List<Enumeration<CapabilityStatement.ReferenceHandlingPolicy>> referenceHandlingPolicy = Arrays.asList(
+        //     new Enumeration<>(new CapabilityStatement.ReferenceHandlingPolicyEnumFactory(), CapabilityStatement.ReferenceHandlingPolicy.LITERAL),
+        //     new Enumeration<>(new CapabilityStatement.ReferenceHandlingPolicyEnumFactory(), CapabilityStatement.ReferenceHandlingPolicy.LOGICAL)
+        // );
 
-        List<CapabilityStatement.CapabilityStatementRestResourceComponent> filteredResources = cs.getRest().stream()
-        .flatMap(rest -> rest.getResource().stream())
-        .map(resource -> {
-            String typeName = resource.getType(); // Obtener el nombre del tipo de recurso como cadena
-            ResourceType type = ResourceType.fromCode(typeName); // Convertir la cadena en un objeto ResourceType
+        // List<CapabilityStatement.CapabilityStatementRestResourceComponent> filteredResources = cs.getRest().stream()
+        // .flatMap(rest -> rest.getResource().stream())
+        // .map(resource -> {
+        //     String typeName = resource.getType(); // Obtener el nombre del tipo de recurso como cadena
+        //     ResourceType type = ResourceType.fromCode(typeName); // Convertir la cadena en un objeto ResourceType
 
-            // Verificar si el tipo de recurso está en la lista de recursos a conservar
-            if (type != null && resourcesToKeep.contains(type)) {
-                // Si es CodeSystem, ValueSet o StructureDefinition, actualizar las interacciones
-                if (ResourceType.CodeSystem.equals(type) || ResourceType.ValueSet.equals(type) || ResourceType.StructureDefinition.equals(type)) {
-                    List<CapabilityStatement.TypeRestfulInteraction> interactionsToKeep = Arrays.asList(
-                            CapabilityStatement.TypeRestfulInteraction.VREAD,
-                            CapabilityStatement.TypeRestfulInteraction.READ,
-                            CapabilityStatement.TypeRestfulInteraction.SEARCHTYPE
-                    );
-                    resource.getInteraction().removeIf(interaction -> !interactionsToKeep.contains(interaction.getCode()));
-                    resource.setVersioning(CapabilityStatement.ResourceVersionPolicy.NOVERSION);
-                    resource.setConditionalCreate(false);
-                    resource.setConditionalUpdate(false);
-                    resource.setConditionalDelete(CapabilityStatement.ConditionalDeleteStatus.NOTSUPPORTED);
-                } else {
-                    resource.setReferencePolicy(referenceHandlingPolicy);
-                }
+        //     // Verificar si el tipo de recurso está en la lista de recursos a conservar
+        //     if (type != null && resourcesToKeep.contains(type)) {
+        //         // Si es CodeSystem, ValueSet o StructureDefinition, actualizar las interacciones
+        //         if (ResourceType.CodeSystem.equals(type) || ResourceType.ValueSet.equals(type) || ResourceType.StructureDefinition.equals(type)) {
+        //             List<CapabilityStatement.TypeRestfulInteraction> interactionsToKeep = Arrays.asList(
+        //                     CapabilityStatement.TypeRestfulInteraction.VREAD,
+        //                     CapabilityStatement.TypeRestfulInteraction.READ,
+        //                     CapabilityStatement.TypeRestfulInteraction.SEARCHTYPE
+        //             );
+        //             resource.getInteraction().removeIf(interaction -> !interactionsToKeep.contains(interaction.getCode()));
+        //             resource.setVersioning(CapabilityStatement.ResourceVersionPolicy.NOVERSION);
+        //             resource.setConditionalCreate(false);
+        //             resource.setConditionalUpdate(false);
+        //             resource.setConditionalDelete(CapabilityStatement.ConditionalDeleteStatus.NOTSUPPORTED);
+        //         } else {
+        //             resource.setReferencePolicy(referenceHandlingPolicy);
+        //         }
 
-                // Limpiar los RevIncludes
-                List<StringType> searchRevInclude = resource.getSearchRevInclude(); // Obtener la lista actual de RevIncludes
-                List<StringType> filteredRevInclude = searchRevInclude.stream()
-                        .filter(revInclude -> {
-                            String[] parts = revInclude.getValue().split(":"); // Dividir el RevInclude en partes por ":"
-                            if (parts.length > 0) {
-                                String resourceName = parts[0]; // Tomar la parte antes del ":"
-                                return resourcesToKeep.stream().anyMatch(resourceToKeep -> resourceToKeep.name().equals(resourceName));
-                            }
-                            return false;
-                        })
-                        .collect(Collectors.toList());
+        //         // Limpiar los RevIncludes
+        //         List<StringType> searchRevInclude = resource.getSearchRevInclude(); // Obtener la lista actual de RevIncludes
+        //         List<StringType> filteredRevInclude = searchRevInclude.stream()
+        //                 .filter(revInclude -> {
+        //                     String[] parts = revInclude.getValue().split(":"); // Dividir el RevInclude en partes por ":"
+        //                     if (parts.length > 0) {
+        //                         String resourceName = parts[0]; // Tomar la parte antes del ":"
+        //                         return resourcesToKeep.stream().anyMatch(resourceToKeep -> resourceToKeep.name().equals(resourceName));
+        //                     }
+        //                     return false;
+        //                 })
+        //                 .collect(Collectors.toList());
                 
-                // Actualizar los RevIncludes filtrados
-                resource.setSearchRevInclude(filteredRevInclude);
+        //         // Actualizar los RevIncludes filtrados
+        //         resource.setSearchRevInclude(filteredRevInclude);
 
-                return resource;
-            }
+        //         return resource;
+        //     }
 
-            return null; // Descartar otros recursos
-        })
-        .filter(Objects::nonNull)
-        .collect(Collectors.toList());
+        //     return null; // Descartar otros recursos
+        // })
+        // .filter(Objects::nonNull)
+        // .collect(Collectors.toList());
 
-        // Actualizar los recursos en el CapabilityStatement
-        cs.getRest().forEach(rest -> rest.setResource(new ArrayList<>(filteredResources)));
+        // // Actualizar los recursos en el CapabilityStatement
+        // cs.getRest().forEach(rest -> rest.setResource(new ArrayList<>(filteredResources)));
 
         // Customize the CapabilityStatement as desired
         cs.setId("hl7.fhir.chile.server");
